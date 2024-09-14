@@ -24,8 +24,21 @@ class Settings extends StatelessWidget {
       backgroundColor: const Color.fromARGB(255, 255, 255, 255),
       body: Column(
         children: [
-
-          const Spacer(),
+          Expanded(
+            child: ListView.separated(
+              itemCount: items.length,
+              separatorBuilder: (BuildContext context, int index) {
+                return const Divider(
+                );
+              },
+              itemBuilder: (BuildContext context, int index) {
+                return ListTileWidget(
+                  icon: items[index]['icon'],
+                  text: items[index]['text'],
+                );
+              },
+            ),
+          ),
           Padding(
             padding: EdgeInsets.symmetric(horizontal: 20.0.r),
             child: ButtonWidget(
@@ -51,6 +64,33 @@ class Settings extends StatelessWidget {
           ),
           18.ph,
         ],
+      ),
+    );
+  }
+}
+
+class ListTileWidget extends StatelessWidget {
+  const ListTileWidget({super.key, required this.icon, required this.text});
+
+  final IconData icon;
+  final String text;
+
+  @override
+  Widget build(BuildContext context) {
+    return Container(
+      decoration: const BoxDecoration(
+        
+      ),
+      child: Padding(
+        padding: const EdgeInsets.symmetric(vertical: 8, horizontal: 15),
+        child: ListTile(
+          leading: Icon(icon),
+          title: Text(
+            text,
+            style: const TextStyle(fontWeight: FontWeight.w800),
+          ),
+          trailing: const Icon(Icons.arrow_forward_ios_rounded),
+        ),
       ),
     );
   }
